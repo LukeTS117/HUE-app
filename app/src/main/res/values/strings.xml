@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">HUE app</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="Connection">Connection</string>
+    <string name="UserKey">User Key</string>
+    <string name="ipaddress">IP Address</string>
+    <string name="port">Port</string>
+    <string name="userinterface">User Interface</string>
+    <string name="darkmode">"Darkmode "</string>
+    <string name="options">Options</string>
 </resources>
