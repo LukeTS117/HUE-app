@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     private Button button;
     private SharedPref sharedPref;
     private FragmentManager fragmentManager;
+    private LightConfiguration lightConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
 
         if(themeChanged){
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            //lightConfiguration = new LightConfiguration(this.sharedPref.UserKey,)
             startActivity(i);
             finish();
         }else{
