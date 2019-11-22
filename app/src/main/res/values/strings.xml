@@ -11,4 +11,8 @@
     <string name="userinterface">User Interface</string>
     <string name="darkmode">"Darkmode "</string>
     <string name="options">Options</string>
+    <string name="Hue">Hue</string>
+    <string name="Saturation">Saturation</string>
+    <string name="Brightness">Brightness</string>
+    <string name="TurnOn">Turn on</string>
 </resources>

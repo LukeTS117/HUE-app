@@ -37,6 +37,8 @@ public class OptionsFrament extends Fragment {
     private EditText IP;
     private EditText Port;
 
+    private boolean themeChanged = false;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -116,6 +118,7 @@ public class OptionsFrament extends Fragment {
                 }else{
                     sharedPref.setDarkmodeState(false);
                 }
+                themeChanged = true;
 
             }
         });
@@ -125,7 +128,8 @@ public class OptionsFrament extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onSavePressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(themeChanged);
+            themeChanged = false;
         }
     }
 
@@ -158,8 +162,7 @@ public class OptionsFrament extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-
+        void onFragmentInteraction(boolean themeChanged);
     }
 
 
