@@ -133,7 +133,7 @@
             android:id="@+id/colorPreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="?android:attr/colorAccent"
+            android:src="?attr/backgroundcolor"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
