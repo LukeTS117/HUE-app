@@ -97,7 +97,7 @@
                 android:id="@+id/editText_port"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoText="false"
+
                 android:ems="10"
                 android:hint="@string/port"
                 android:inputType="textPersonName"

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".LightSettings.LightSettingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardViewlightSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/cardbackgroundcolor"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="138dp"
+        tools:layout_conversion_absoluteWidth="395dp"
+        tools:layout_conversion_wrapHeight="0"
+        tools:layout_conversion_wrapWidth="1080">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp">
+
+            <Switch
+                android:id="@+id/switch_onoff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/TurnOn"
+                android:textColor="?attr/textcolor"
+                tools:layout_conversion_absoluteHeight="27dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+            <TextView
+                android:id="@+id/text_hue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Hue"
+                android:textColor="?attr/textcolor"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="35dp" />
+
+            <SeekBar
+                android:id="@+id/seekBar_hue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="65535"
+                tools:layout_conversion_absoluteHeight="18dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="54dp" />
+
+            <TextView
+                android:id="@+id/text_brightness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/Brightness"
+                android:textColor="?attr/textcolor"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="72dp" />
+
+            <SeekBar
+                android:id="@+id/seekBar_brightness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="254"
+                tools:layout_conversion_absoluteHeight="18dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="91dp" />
+
+            <TextView
+                android:id="@+id/text_saturation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="254"
+                android:text="@string/Saturation"
+                android:textColor="?attr/textcolor"
+                tools:layout_conversion_absoluteHeight="19dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="109dp" />
+
+            <SeekBar
+                android:id="@+id/seekBar_saturation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_conversion_absoluteHeight="18dp"
+                tools:layout_conversion_absoluteWidth="387dp"
+                tools:layout_editor_absoluteX="12dp"
+                tools:layout_editor_absoluteY="128dp" />
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="?attr/cardbackgroundcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewlightSettings"
+        tools:layout_conversion_absoluteHeight="586dp"
+        tools:layout_conversion_absoluteWidth="411dp">
+
+        <ImageView
+            android:id="@+id/colorPreview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="?attr/backgroundcolor"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+</android.support.constraint.ConstraintLayout>
