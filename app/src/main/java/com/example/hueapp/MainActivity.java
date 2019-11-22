@@ -2,7 +2,6 @@ package com.example.hueapp;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.FragmentContainer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import com.example.hueapp.LightSettings.LightSettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements OptionsFrament.OnFragmentInteractionListener, LightSettingsFragment.OnFragmentInteractionListener{
 
