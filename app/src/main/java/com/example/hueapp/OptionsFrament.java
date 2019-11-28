@@ -37,6 +37,7 @@ public class OptionsFrament extends Fragment {
     private EditText IP;
     private EditText Port;
 
+
     private boolean themeChanged = false;
 
     // TODO: Rename and change types of parameters
@@ -105,10 +106,10 @@ public class OptionsFrament extends Fragment {
                 sharedPref.setUserKey(UserKey.getText().toString());
                 sharedPref.setIP(IP.getText().toString());
                 sharedPref.setPort(Port.getText().toString());
-
-
             }
         });
+
+
 
         darkmodeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import com.example.hueapp.LightConfiguration;
 import com.example.hueapp.R;
+import com.example.hueapp.SharedPref;
 
 
 /**
@@ -32,6 +34,8 @@ public class LightSettingsFragment extends Fragment {
     private SeekBar hueSeekbar;
     private SeekBar satSeekbar;
     private SeekBar briSeekbar;
+    public LightConfiguration lightConfiguration;
+    private SharedPref sharedPref;
 
 
     // TODO: Rename and change types of parameters
@@ -69,6 +73,7 @@ public class LightSettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        sharedPref = new SharedPref(this.getContext());
     }
 
     @Override
@@ -130,12 +135,21 @@ public class LightSettingsFragment extends Fragment {
 
             }
         });
+        if(lightConfiguration != null){
+            lightConfiguration.setHostIP(sharedPref.getIP());
+            lightConfiguration.setPortNr(sharedPref.getPort());
+            lightConfiguration.setUserKey(sharedPref.getUserKey());
+        } else {
+            lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), this.getContext());
+        }
+
         return view;
     }
 
     public void onSeekBarValueChanged(){
         int newColor = Color.HSVToColor(new float[]{(float)hueSeekbar.getProgress()/((float)hueSeekbar.getMax()/360f), (float)satSeekbar.getProgress()/(float)satSeekbar.getMax(), (float)briSeekbar.getProgress()/(float)briSeekbar.getMax()});
         previewColor.setColorFilter(newColor);
+        lightConfiguration.sendToHueBridge(hueSeekbar.getProgress(), satSeekbar.getProgress(), briSeekbar.getProgress());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
