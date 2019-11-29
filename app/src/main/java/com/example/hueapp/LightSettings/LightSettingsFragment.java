@@ -147,15 +147,22 @@ public class LightSettingsFragment extends Fragment {
     }
 
     public void onSeekBarValueChanged(){
-        int newColor = Color.HSVToColor(new float[]{(float)hueSeekbar.getProgress()/((float)hueSeekbar.getMax()/360f), (float)satSeekbar.getProgress()/(float)satSeekbar.getMax(), (float)briSeekbar.getProgress()/(float)briSeekbar.getMax()});
+
+        int hue = hueSeekbar.getProgress();
+        int sat = satSeekbar.getProgress();
+        int bri = briSeekbar.getProgress();
+
+        int newColor = Color.HSVToColor(new float[]{(float)hue/((float)hueSeekbar.getMax()/360f), (float)sat/(float)satSeekbar.getMax(), (float)bri/(float)briSeekbar.getMax()});
         previewColor.setColorFilter(newColor);
+        mListener.OnLightSettingsFragment_ColorChanged(hue, sat, bri);
+
         lightConfiguration.sendToHueBridge(hueSeekbar.getProgress(), satSeekbar.getProgress(), briSeekbar.getProgress());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+           // mListener.onFragmentInteraction(uri);
         }
     }
 
@@ -188,6 +195,6 @@ public class LightSettingsFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void OnLightSettingsFragment_ColorChanged(int hue, int sat, int bri);
     }
 }

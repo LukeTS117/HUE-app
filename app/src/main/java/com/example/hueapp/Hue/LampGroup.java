@@ -17,6 +17,7 @@ public class LampGroup {
         this.name = name;
         this.lamps = lamps;
         this.lampState = lampState;
+        Log.i(TAG, "Lampgroup created");
     }
 
     public void addLamp(Lamp lamp){
@@ -26,6 +27,7 @@ public class LampGroup {
     public void removeLamp(Lamp lamp){
         if(lamps.contains(lamp)){
             lamps.remove(lamp);
+            Log.i(TAG, "Lamp removed");
         }else{
             Log.i(TAG, "Lamp not found");
         }
