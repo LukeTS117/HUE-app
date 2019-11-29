@@ -8,7 +8,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hueapp.Hue.Lamp;
+import com.example.hueapp.Hue.LampState;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,6 +24,7 @@ public class LightConfiguration {
     private String hostIP;
     private String portNr;
     private int numberOfLights;
+    private LampListner listner;
 
     public int getNumberOfLights() {
         return numberOfLights;
@@ -50,7 +55,7 @@ public class LightConfiguration {
 
     public void sendToHueBridge(int hue, int saturation, int brightness){
         CustomJsonArrayRequest request = new CustomJsonArrayRequest(
-                Request.Method.PUT,
+                Request.Method.POST,
                 buildUrl(),
                 buildBody(hue, saturation, brightness),
                 new Response.Listener<JSONArray>() {
@@ -59,8 +64,45 @@ public class LightConfiguration {
                         try {
                             Log.i("RESPONSE", "Response=" + response.toString());
                             numberOfLights = response.length();
-                            Log.i("DEBUG", "Lights Available: " + response.length());
+                            Log.d("DEBUG", "Lights Available: " + response.length());
                         } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("ERROR", error.toString());
+                    }
+                }
+        );
+        requestQueue.add(request);
+    }
+
+    public void getLamps(){
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                buildUrl(),
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            for(int i = 0; response.length() > i; i++){
+                                JSONObject payload = response.getJSONObject(i + "");
+                                Boolean isOn = payload.getJSONObject("state").getBoolean("on");
+                                int hue = payload.getJSONObject("state").getInt("hue");
+                                int bri = payload.getJSONObject("state").getInt("bri");
+                                int sat = payload.getJSONObject("state").getInt("sat");
+                                String uniqueID = payload.getString("uniqueid");
+
+                                LampState lampState = new LampState(isOn, bri, hue, sat);
+                                Lamp lamp = new Lamp(lampState, "Lamp " + i, uniqueID);
+
+                                listner.onLampAvailable(lamp);
+                            }
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }

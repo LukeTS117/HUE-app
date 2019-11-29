@@ -17,7 +17,7 @@ import com.example.hueapp.LightSettings.LightSettingsFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OptionsFrament.OnFragmentInteractionListener, LightSettingsFragment.OnFragmentInteractionListener, LampSelectionFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements OptionsFrament.OnFragmentInteractionListener, LightSettingsFragment.OnFragmentInteractionListener, LampSelectionFragment.OnFragmentInteractionListener, LampListner{
 
     private FrameLayout fragementContainer;
     private FrameLayout mainFragmentContainer;
@@ -28,39 +28,6 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     private ArrayList<Lamp> selectedLamps;
     private LightConfiguration lightConfiguration;
     private LampSelectionFragment lampSelectionFragment;
-
-
-    //todo: remove this
-    private void gimmeSomeLamps(){
-        lamps = new ArrayList<>();
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
-        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
-        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
         selectedLamps = new ArrayList<>();
 
         //ToDo: implement huebridge
-        gimmeSomeLamps();
+
+        lamps = new ArrayList<>();
 
         setLightSettingsFragment();
         setLampSelectionFragment();
@@ -130,12 +98,12 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     }
 
     @Override
-    public void onFragmentInteraction(boolean themeChanged) {
+    public void onOptionSaveButtonPressed(boolean themeChanged) {
 
-
+        lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), getApplicationContext());
+        lightConfiguration.getLamps();
         if(themeChanged){
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            //lightConfiguration = new LightConfiguration(this.sharedPref.UserKey,)
             startActivity(i);
             finish();
         }else{
@@ -169,5 +137,10 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
         for(int i = 0; i<this.selectedLamps.size(); i++){
            this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).setSelected(true);
         }
+    }
+
+    @Override
+    public void onLampAvailable(Lamp lamp) {
+        this.onDataAvailable(lamp);
     }
 }

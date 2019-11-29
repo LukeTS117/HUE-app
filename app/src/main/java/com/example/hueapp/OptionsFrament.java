@@ -129,7 +129,7 @@ public class OptionsFrament extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onSavePressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(themeChanged);
+            mListener.onOptionSaveButtonPressed(themeChanged);
             themeChanged = false;
         }
     }
@@ -163,7 +163,7 @@ public class OptionsFrament extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(boolean themeChanged);
+        void onOptionSaveButtonPressed(boolean themeChanged);
     }
 
 
