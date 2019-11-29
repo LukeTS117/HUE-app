@@ -44,19 +44,20 @@ public class LightConfiguration {
 
     RequestQueue requestQueue;
 
-    public LightConfiguration(String userKey, String hostIP, String portNr, Context context){
+    public LightConfiguration(String userKey, String hostIP, String portNr, Context context, LampListner lampListner){
         this.userKey = userKey;
         this.hostIP = hostIP;
         this.portNr = portNr;
         requestQueue = Volley.newRequestQueue(context);
+        this.listner = lampListner;
     }
 
 
 
-    public void sendToHueBridge(int hue, int saturation, int brightness){
+    public void sendToHueBridge(int hue, int saturation, int brightness, String lightNR){
         CustomJsonArrayRequest request = new CustomJsonArrayRequest(
-                Request.Method.POST,
-                buildUrl(),
+                Request.Method.PUT,
+                buildUrl(lightNR),
                 buildBody(hue, saturation, brightness),
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -83,14 +84,14 @@ public class LightConfiguration {
     public void getLamps(){
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                buildUrl(),
+                getterBuildURL(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             for(int i = 0; response.length() > i; i++){
-                                JSONObject payload = response.getJSONObject(i + "");
+                                JSONObject payload = response.getJSONObject(i+1+ "");
                                 Boolean isOn = payload.getJSONObject("state").getBoolean("on");
                                 int hue = payload.getJSONObject("state").getInt("hue");
                                 int bri = payload.getJSONObject("state").getInt("bri");
@@ -98,7 +99,7 @@ public class LightConfiguration {
                                 String uniqueID = payload.getString("uniqueid");
 
                                 LampState lampState = new LampState(isOn, bri, hue, sat);
-                                Lamp lamp = new Lamp(lampState, "Lamp " + i, uniqueID);
+                                Lamp lamp = new Lamp(lampState, "Lamp " + i+1, uniqueID, i+1);
 
                                 listner.onLampAvailable(lamp);
                             }
@@ -117,13 +118,22 @@ public class LightConfiguration {
         requestQueue.add(request);
     }
 
-    private String buildUrl(){
-        String url = "http://" + this.hostIP + ":" + this.portNr + buildApiString();
+    private String buildUrl(String lightNR){
+        String url = "http://" + this.hostIP + ":" + this.portNr + buildApiString(lightNR);
         return url;
     }
 
-    private String buildApiString(){
-        String apiString = "/api/" + this.userKey + "/lights";
+    private String buildApiString(String lightNR){
+        String apiString = "/api/" + this.userKey +"/lights/" + lightNR + "/state";
+        return apiString;
+    }
+
+    private String getterBuildURL(){
+        String url = "http://" + this.hostIP + ":" + this.portNr + getterBuildAPI();
+        return url;
+    }
+    private String getterBuildAPI(){
+        String apiString = "/api/" + this.userKey +"/lights/";
         return apiString;
     }
 

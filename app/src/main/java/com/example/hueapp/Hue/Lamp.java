@@ -6,6 +6,8 @@ import android.util.Log;
 
 public class Lamp implements Parcelable {
 
+    private int lampNumber;
+
     private LampState lampState;
     private String name;
     private String uniqueID;
@@ -13,19 +15,20 @@ public class Lamp implements Parcelable {
     boolean selected;
     private String TAG = "LAMP";
 
-    public Lamp(LampState lampState, String name, String uniqueID) {
+    public Lamp(LampState lampState, String name, String uniqueID, int lampNumber) {
         this.lampState = lampState;
         this.name = name;
         this.uniqueID = uniqueID;
         this.selected = false;
+        this.lampNumber = lampNumber;
         Log.i(TAG, "Lamp " + uniqueID + " created");
     }
 
-    public Lamp(LampState lampState, String name, String uniqueID, boolean selected) {
+    public Lamp(LampState lampState, String name, String uniqueID, int lampNumber, boolean selected) {
         this.lampState = lampState;
         this.name = name;
         this.uniqueID = uniqueID;
-        this.selected = false;
+        this.lampNumber = lampNumber;
         Log.i(TAG, "Lamp " + uniqueID + " created");
         this.selected = selected;
     }
@@ -93,6 +96,10 @@ public class Lamp implements Parcelable {
 
     public void setTAG(String TAG) {
         this.TAG = TAG;
+    }
+
+    public int getLampNumber() {
+        return lampNumber;
     }
 
     @Override

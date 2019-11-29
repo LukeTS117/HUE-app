@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import com.example.hueapp.Hue.Lamp;
+import com.example.hueapp.LampListner;
 import com.example.hueapp.LightConfiguration;
 import com.example.hueapp.R;
 import com.example.hueapp.SharedPref;
@@ -24,7 +26,7 @@ import com.example.hueapp.SharedPref;
  * Use the {@link LightSettingsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LightSettingsFragment extends Fragment {
+public class LightSettingsFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -135,13 +137,6 @@ public class LightSettingsFragment extends Fragment {
 
             }
         });
-        if(lightConfiguration != null){
-            lightConfiguration.setHostIP(sharedPref.getIP());
-            lightConfiguration.setPortNr(sharedPref.getPort());
-            lightConfiguration.setUserKey(sharedPref.getUserKey());
-        } else {
-            lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), this.getContext());
-        }
 
         return view;
     }
@@ -156,7 +151,6 @@ public class LightSettingsFragment extends Fragment {
         previewColor.setColorFilter(newColor);
         mListener.OnLightSettingsFragment_ColorChanged(hue, sat, bri);
 
-        lightConfiguration.sendToHueBridge(hueSeekbar.getProgress(), satSeekbar.getProgress(), briSeekbar.getProgress());
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -182,6 +176,7 @@ public class LightSettingsFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
 
     /**
      * This interface must be implemented by activities that contain this

@@ -17,7 +17,11 @@ import com.example.hueapp.LightSettings.LightSettingsFragment;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements OptionsFrament.OnFragmentInteractionListener, LightSettingsFragment.OnFragmentInteractionListener, LampSelectionFragment.OnFragmentInteractionListener, LampListner{
+public class MainActivity extends AppCompatActivity
+        implements OptionsFrament.OnFragmentInteractionListener,
+        LightSettingsFragment.OnFragmentInteractionListener,
+        LampSelectionFragment.OnFragmentInteractionListener,
+        LampListner{
 
     private FrameLayout fragementContainer;
     private FrameLayout mainFragmentContainer;
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     @Override
     public void onOptionSaveButtonPressed(boolean themeChanged) {
 
-        lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), getApplicationContext());
+        lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), getApplicationContext(), this);
         lightConfiguration.getLamps();
         if(themeChanged){
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -118,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
             this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampState().setHue(hue);
             this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampState().setSaturation(sat);
             this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampState().setBrightness(bri);
+            lightConfiguration.sendToHueBridge(hue, sat, bri, this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampNumber() + "");
         }
 
         Bundle bundle = new Bundle();
