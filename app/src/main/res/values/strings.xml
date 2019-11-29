@@ -15,4 +15,8 @@
     <string name="Saturation">Saturation</string>
     <string name="Brightness">Brightness</string>
     <string name="TurnOn">Turn on</string>
+
+    <string name="Light_Key" translatable="false">lightkey</string>
+    <string name="Selected_Light_Key" translatable="false">selectedlightkey</string>
+
 </resources>

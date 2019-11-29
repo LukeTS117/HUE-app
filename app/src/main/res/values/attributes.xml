@@ -5,6 +5,8 @@
         <attr name="textcolor" format="color"/>
         <attr name="headertextcolor" format="color"/>
         <attr name="cardbackgroundcolor" format="color"/>
+        <attr name="colorSelected" format="color"/>
+        <attr name="colorNotSelected" format="color"/>
 
     </declare-styleable>
 </resources>

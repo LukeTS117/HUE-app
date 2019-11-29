@@ -3,10 +3,12 @@
     <color name="colorBackground">#F3F3F3</color>
     <color name="colorCardBackground">#FFFFFF</color>
     <color name="colorPrimary">#6DC8FA</color>
-    <color name="colorPrimaryDark">#03A9F4</color>
+    <color name="colorPrimaryDark">#37F403</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorText">#000000</color>
     <color name="colorHeaderText">#FDFDFD</color>
+    <color name="colorSelected">#FF3939</color>
+    <color name="colorNotSelected">#4D4D4D</color>
 
 
     <color name="Darkmode_colorBackground">#222222</color>
@@ -16,4 +18,6 @@
     <color name="Darkmode_colorAccent">#740013</color>
     <color name="Darkmode_colorText">#C9C9C9</color>
     <color name="Darkmode_colorHeaderText">#C9C9C9</color>
+    <color name="Darkmode_colorSelected">#FF3939</color>
+    <color name="Darkmode_colorNotSelected">#4D4D4D</color>
 </resources>

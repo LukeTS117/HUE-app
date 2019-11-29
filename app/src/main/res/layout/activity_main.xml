@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimaryDark"
@@ -34,7 +35,7 @@
     </LinearLayout>
 
     <FrameLayout
-        android:id="@+id/fragment_container2"
+        android:id="@+id/fragment_container_bottom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,6 +47,18 @@
 
     </FrameLayout>
 
+
+    <FrameLayout
+        android:id="@+id/fragment_container_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/fragment_container"

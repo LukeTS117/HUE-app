@@ -8,25 +8,11 @@
     android:id="@+id/ConstraintLayout">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Switch" />
-
-    </LinearLayout>
-
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_constraint"
-        android:layout_height="match_constraint"
+
+        android:id="@+id/lampselection_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"

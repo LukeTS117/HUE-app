@@ -4,11 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.hueapp.Hue.Lamp;
 import com.example.hueapp.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +32,11 @@ public class LampSelectionFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerView;
+    private LightAdapter lightAdapter;
+
+    private ArrayList<Lamp> selectedLamps;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,15 +75,52 @@ public class LampSelectionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lamp_selection, container, false);
+
+        selectedLamps = new ArrayList<>();
+
+        View view = inflater.inflate(R.layout.fragment_lamp_selection, container, false);
+        ArrayList<Lamp> lamps = getArguments().getParcelableArrayList(getString(R.string.Light_Key));
+
+        for (Lamp lamp : lamps) {
+            if(lamp.isSelected()){
+                selectedLamps.add(lamp);
+            }
+        }
+        recyclerView = view.findViewById(R.id.lampselection_recyclerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(
+                this.getContext(), 5, GridLayoutManager.VERTICAL, false
+        ));
+        lightAdapter = new LightAdapter(lamps, this);
+        recyclerView.setAdapter(lightAdapter);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            //mListener.onFragmentInteraction();
         }
     }
+
+    public void selectLamp(Lamp lamp){
+        selectedLamps.add(lamp);
+        onLampClicked();
+    }
+
+    public void deselectLamp(Lamp lamp){
+        if(selectedLamps.contains(lamp)) {
+            selectedLamps.remove(lamp);
+        }
+       onLampClicked();
+    }
+
+    public void onLampClicked(){
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(getString(R.string.Selected_Light_Key), selectedLamps);
+
+        mListener.onLampSelectionChanged(bundle);
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -104,6 +151,6 @@ public class LampSelectionFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onLampSelectionChanged(Bundle selectedLights);
     }
 }
