@@ -92,20 +92,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onDataAvailable(Lamp lamp){
-        lamps.add(lamp);
+            lamps.add(lamp);
 
-        Bundle bundle = new Bundle();
-        bundle.putParcelableArrayList(getString(R.string.Light_Key), lamps);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(getString(R.string.Light_Key), lamps);
 
-        lampSelectionFragment.setArguments(bundle);
-        lampSelectionFragment.onDataSetChanged();
+            lampSelectionFragment.setArguments(bundle);
+            lampSelectionFragment.onDataSetChanged();
     }
 
     @Override
     public void onOptionSaveButtonPressed(boolean themeChanged) {
 
-        lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), getApplicationContext(), this);
-        lightConfiguration.getLamps();
+        if(lightConfiguration == null){
+            lightConfiguration = new LightConfiguration(sharedPref.getUserKey(), sharedPref.getIP(), sharedPref.getPort(), getApplicationContext(), this);
+            lightConfiguration.getLamps();
+        }
+
+
+
         if(themeChanged){
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
