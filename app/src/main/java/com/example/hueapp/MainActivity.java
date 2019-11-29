@@ -29,8 +29,33 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     private LightConfiguration lightConfiguration;
 
 
+    //todo: remove this
     private void gimmeSomeLamps(){
         lamps = new ArrayList<>();
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
+        lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
+        lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
         lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 1", "Lamp 1" ));
         lamps.add(new Lamp(new LampState(true, 3000,125,254), "Lamp 2", "Lamp 2" , true));
         lamps.add(new Lamp(new LampState(true, 0,0,0), "Lamp 3", "Lamp 3" ));
