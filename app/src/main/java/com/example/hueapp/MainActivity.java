@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     private ArrayList<Lamp> lamps;
     private ArrayList<Lamp> selectedLamps;
     private LightConfiguration lightConfiguration;
+    private LampSelectionFragment lampSelectionFragment;
 
 
     //todo: remove this
@@ -111,11 +112,21 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     private void setLampSelectionFragment(){
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList(getString(R.string.Light_Key), lamps);
-        LampSelectionFragment lsf = LampSelectionFragment.newInstance(null,null);
-        lsf.setArguments(bundle);
+        lampSelectionFragment = LampSelectionFragment.newInstance(null,null);
+        lampSelectionFragment.setArguments(bundle);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.addToBackStack(null);
-        transaction.add(R.id.fragment_container_top, lsf, "LIGHT_SETTINGS_FRAGMENT").commit();
+        transaction.add(R.id.fragment_container_top, lampSelectionFragment, "LIGHT_SETTINGS_FRAGMENT").commit();
+    }
+
+    private void onDataAvailable(Lamp lamp){
+        lamps.add(lamp);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(getString(R.string.Light_Key), lamps);
+
+        lampSelectionFragment.setArguments(bundle);
+        lampSelectionFragment.onDataSetChanged();
     }
 
     @Override
@@ -136,11 +147,16 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
     @Override
     public void OnLightSettingsFragment_ColorChanged(int hue, int sat, int bri) {
         for(int i = 0; i<this.selectedLamps.size(); i++){
-            this.selectedLamps.get(i).getLampState().setHue(hue);
-            this.selectedLamps.get(i).getLampState().setSaturation(sat);
-            this.selectedLamps.get(i).getLampState().setBrightness(bri);
+            this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampState().setHue(hue);
+            this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampState().setSaturation(sat);
+            this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).getLampState().setBrightness(bri);
         }
-        setLampSelectionFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(getString(R.string.Light_Key), lamps);
+
+        lampSelectionFragment.setArguments(bundle);
+        lampSelectionFragment.onDataSetChanged();
     }
 
     @Override
@@ -151,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements OptionsFrament.On
         }
 
         for(int i = 0; i<this.selectedLamps.size(); i++){
-            this.selectedLamps.get(i).setSelected(true);
+           this.lamps.get(this.lamps.indexOf(this.selectedLamps.get(i))).setSelected(true);
         }
     }
 }

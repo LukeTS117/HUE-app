@@ -92,7 +92,20 @@ public class LampSelectionFragment extends Fragment {
         ));
         lightAdapter = new LightAdapter(lamps, this);
         recyclerView.setAdapter(lightAdapter);
+
         return view;
+    }
+
+    public void onDataSetChanged(){
+        ArrayList<Lamp> lamps = getArguments().getParcelableArrayList(getString(R.string.Light_Key));
+        selectedLamps.clear();
+        for (Lamp lamp : lamps) {
+            if(lamp.isSelected()){
+                selectedLamps.add(lamp);
+            }
+        }
+        lightAdapter = new LightAdapter(lamps, this);
+        recyclerView.setAdapter(lightAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
